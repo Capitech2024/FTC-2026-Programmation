@@ -8,3 +8,5 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 private DcMotor leftmotor = null;
     private DcMotor rightmotor = null;
     private ElapsedTime tempo = new ElapsedTime();
+telemetry.addData("Status", "Autônomo Finalizado!");
+telemetry.update(0)
