@@ -1,0 +1,55 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
+@Autonomous(name = "Autonomous IMU", group = "Autonomous")
+public class autonomous extends LinearOpMode {
+
+    private IMU imu;
+    private DcMotor motor4;
+    private DcMotor motor5;
+    
+    @Override
+    public void runOpMode() {
+        // Mapeamento dos Hardwares
+        motor4 = hardwareMap.get(DcMotor.class, "motor4");
+        motor5 = hardwareMap.get(DcMotor.class, "motor5");
+        imu = hardwareMap.get(IMU.class, "imu");
+        
+        // Orientação do Control Hub no robô
+        RevHubOrientationOnRobot.LogoFacingDirection logo = RevHubOrientationOnRobot.LogoFacingDirection.UP;
+        RevHubOrientationOnRobot.UsbFacingDirection usb = RevHubOrientationOnRobot.UsbFacingDirection.FORWARD; 
+        RevHubOrientationOnRobot orientation = new RevHubOrientationOnRobot(logo, usb);
+        
+        imu.initialize(new IMU.Parameters(orientation));
+        
+        // Telemetria da Inicialização
+        telemetry.addData("Status", "Pronto para iniciar!");
+        telemetry.update();
+        
+        // Normalização para garantir que a potência não ultrapasse 1.0
+        double maxPower = 1.0; 
+        
+        motor4.setPower(0.5);
+        motor5.setPower(0.5);
+           
+        // Aguarda o usuário iniciar a programação no Driver Station 
+        waitForStart();
+        
+        // Zera o giroscópio pra começar do 0°
+        imu.resetYaw();
+
+        while (opModeIsActive()) {
+           
+            double heading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+            
+            telemetry.addData("Ângulo do Giroscópio", "%.2f graus", heading);
+            telemetry.update();
+        }
+    }
+}
