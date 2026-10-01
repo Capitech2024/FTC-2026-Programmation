@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name = "menezesMecanum", group = "REV")
-public class menezes extends OpMode {
+@TeleOp(name = "TeleOP", group = "REV")
+public class TeleOP extends OpMode {
 
     private DcMotorEx Motor0;
     private DcMotorEx Motor1;
