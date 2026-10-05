@@ -23,18 +23,18 @@ public class autonomous extends LinearOpMode {
         motor5 = hardwareMap.get(DcMotor.class, "motor5");
         imu = hardwareMap.get(IMU.class, "imu");
 
-        // Orientação do Control Hub no robô
+        // Orientação do Control Hub
         RevHubOrientationOnRobot.LogoFacingDirection logo = RevHubOrientationOnRobot.LogoFacingDirection.UP;
         RevHubOrientationOnRobot.UsbFacingDirection usb = RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
         RevHubOrientationOnRobot orientation = new RevHubOrientationOnRobot(logo, usb);
 
         imu.initialize(new IMU.Parameters(orientation));
 
-        // Telemetria da Inicialização
+        // Telemetria 
         telemetry.addData("Status", "Pronto para iniciar!");
         telemetry.update();
 
-        // Normalização para garantir que a potência não ultrapasse 1.0
+        // Normalização para que a potência não ultrapasse 1.0
         double maxPower = 1.0;
 
         motor0.setPower(0.8);
@@ -42,8 +42,7 @@ public class autonomous extends LinearOpMode {
         motor2.setPower(0.8);
         motor3.setPower(0.8);
 
-
-        // Aguarda o usuário iniciar a programação no Driver Station
+        // Aguarda a inicialização no Driver Station
         waitForStart();
         
         // Zera o giroscópio pra começar do 0°
