@@ -18,4 +18,4 @@ No modo Autônomo e Tele Operado é altamente recomendado que não se use a pot�
 No momento que este README está sendo publicado, o repositório ainda não está completo, e coisas podem mudar. Agradecemos por visitar o repositório oficial da equipe de número #26970 da FIRST Tech Challenge!
 
 
-#Adicionando o titulo
+#Adicionando o titulo.
