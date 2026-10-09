@@ -16,3 +16,6 @@ A programação do modo Autônomo ocorre de forma parecida com tudo que foi vist
 No modo Autônomo e Tele Operado é altamente recomendado que não se use a potência máxima dos motores de 100% (1.0). Ao invés disso, recomenda-se que use porcentagens menores como 80%, 75%, etc. Isso causa a drenagem rápida da bateria nas partidas.
 ## Notas Finais
 No momento que este README está sendo publicado, o repositório ainda não está completo, e coisas podem mudar. Agradecemos por visitar o repositório oficial da equipe de número #26970 da FIRST Tech Challenge!
+
+
+#Adicionando o titulo
