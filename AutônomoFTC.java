@@ -47,13 +47,18 @@ public class Autonomous extends LinearOpMode {
         backRight.setPower(0.6);
         frontLeft.setPower(-0.6);
         backLeft.setPower(0.6);
-        Shooter.setPower(0);
-        sleep(1000);
-        frontRight.setPower(-0.6);
-        backRight.setPower(0.6);
-        frontLeft.setPower(-0.6);
-        backLeft.setPower(0.6);
-        sleep(1000);
+        Shooter.setPower(0); // desligar o shooter
+        Intake.setPower(0.8); //ligar o intake
+        sleep(1500);
+        frontRight.setPower(0); //desligando motore e intake (apenas para teste linhas 55 a 59)
+        backRight.setPower(0);
+        frontLeft.setPower(0);
+        backLeft.setPower(0);
+        Intake.setPower(0);
+
+
+
+
         // Zera o giroscópio
         imu.resetYaw();
 
