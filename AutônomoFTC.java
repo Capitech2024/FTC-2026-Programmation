@@ -42,6 +42,7 @@ public class Autonomous extends LinearOpMode {
          // Normalização para que a potência não ultrapasse 1.0
         double maxPower = 1.0;
 
+        // -- INIT --
         waitForStart();
         Shooter.setPower(0.7); // definição potencia do shooter
         sleep (6031);
