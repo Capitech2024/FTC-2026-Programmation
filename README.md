@@ -1,5 +1,3 @@
-## Breve aviso
-Esse repositório possui todas as mudanças de código E programação principal da equipe Capitech de número #26970 da FIRST Tech Challenge. Entretanto, não espere ser um tutorial pois será apenas uma demonstração sobre o que cada pasta armazena e o que cada código faz.
 ## Bem vindo!
 Seja bem vindo ao repositório oficial de programadores da equipe Capitech #26970 da FIRST Tech Challenge! Aqui temos a programação tanto do modo Autônomo quanto do modo TeleOperado para a temporada Biobuzz (que acontecerá de 2026 a 2027). Recomenda-se de que leia este artigo para se orientar melhor pelo repositório!!
 ## Começando
@@ -15,4 +13,4 @@ A programação do modo Autônomo ocorre de forma parecida com tudo que foi vist
 #### Atenção:
 No modo Autônomo e Tele Operado é altamente recomendado que não se use a potência máxima dos motores de 100% (1.0). Ao invés disso, recomenda-se que use porcentagens menores como 80%, 75%, etc. Isso causa a drenagem rápida da bateria nas partidas.
 ## Notas Finais
-No momento que este README está sendo publicado, o repositório ainda não está completo, e coisas podem mudar. Agradecemos por visitar o repositório oficial da equipe de número #26970 da FIRST Tech Challenge!
+No momento que este README está sendo publicado, o repositório ainda não está completo, e coisas podem mudar. Agradecemos por visitar o repositório oficial da equipe #26970 da FIRST Tech Challenge!
