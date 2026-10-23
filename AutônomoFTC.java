@@ -15,6 +15,7 @@ public class Autonomous extends LinearOpMode {
     private DcMotor frontLeft;
     private DcMotor backLeft;
     private DcMotorEx Shooter;
+    private DcMotorEx Intake;
 
     @Override
     public void runOpMode() {
@@ -24,6 +25,7 @@ public class Autonomous extends LinearOpMode {
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         Shooter = hardwareMap.get(DcMotorEx.class, "Shooter");
+        Intake = hardwareMap.get(DcMotor.class, "Intake");
         imu = hardwareMap.get(IMU.class, "imu");
 
         // Orientação do Control Hub
@@ -33,31 +35,28 @@ public class Autonomous extends LinearOpMode {
 
         imu.initialize(new IMU.Parameters(orientation));
 
-        // Telemetria
+         // Telemetria
         telemetry.addData("Status", "Pronto para iniciar");
         telemetry.update();
 
-        // Normalização para que a potência não ultrapasse 1.0
+         // Normalização para que a potência não ultrapasse 1.0
         double maxPower = 1.0;
 
         waitForStart();
-        Shooter.setPower(0.7);
+        Shooter.setPower(0.7); // definição potencia do shooter
         sleep (6031);
-        frontRight.setPower(-0.6);
+        frontRight.setPower(0.6);
         backRight.setPower(0.6);
-        frontLeft.setPower(-0.6);
+        frontLeft.setPower(0.6);
         backLeft.setPower(0.6);
         Shooter.setPower(0); // desligar o shooter
-        Intake.setPower(0.8); //ligar o intake
+        Intake.setPower(0.8); // ligar o intake
         sleep(1500);
-        frontRight.setPower(0); //desligando motore e intake (apenas para teste linhas 55 a 59)
+        frontRight.setPower(0); //desligando motor e intake (apenas para teste linhas 55 a 59)
         backRight.setPower(0);
         frontLeft.setPower(0);
         backLeft.setPower(0);
         Intake.setPower(0);
-
-
-
 
         // Zera o giroscópio
         imu.resetYaw();
