@@ -41,7 +41,7 @@ public class Autonomous extends LinearOpMode {
 
         // -- INIT --
         waitForStart();
-        frontRight.setPower(0.5);
+        frontRight.setPower(1.0);
         backRight.setPower(0.5);
         frontLeft.setPower(0.5);
         backLeft.setPower(0.5);
