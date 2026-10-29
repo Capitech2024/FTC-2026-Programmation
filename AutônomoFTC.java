@@ -25,7 +25,7 @@ public class Autonomous extends LinearOpMode {
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         Shooter = hardwareMap.get(DcMotorEx.class, "Shooter");
-        Intake = hardwareMap.get(DcMotor.class, "Intake");
+        Intake = hardwareMap.get(DcMotorEx.class, "Intake");
         imu = hardwareMap.get(IMU.class, "imu");
 
         // Orientação do Control Hub
@@ -35,29 +35,27 @@ public class Autonomous extends LinearOpMode {
 
         imu.initialize(new IMU.Parameters(orientation));
 
-         // Telemetria
+        // Telemetria
         telemetry.addData("Status", "Pronto para iniciar");
         telemetry.update();
 
-         // Normalização para que a potência não ultrapasse 1.0
-        double maxPower = 1.0;
-
         // -- INIT --
         waitForStart();
-        Shooter.setPower(0.7); // definição potencia do shooter
-        sleep (6031);
-        frontRight.setPower(0.6);
-        backRight.setPower(0.6);
-        frontLeft.setPower(0.6);
-        backLeft.setPower(0.6);
-        Shooter.setPower(0); // desligar o shooter
-        Intake.setPower(0.8); // ligar o intake
-        sleep(1500);
-        frontRight.setPower(0); //desligando motor e intake (apenas para teste linhas 55 a 59)
-        backRight.setPower(0);
+        frontRight.setPower(0.5);
+        backRight.setPower(0.5);
+        frontLeft.setPower(0.5);
+        backLeft.setPower(0.5);
+        sleep(1502)
+        frontRight.setPower(-0.5);
+        backRight.setPower(-0.5);
+        frontLeft.setPower(-0.5);
+        backLeft.setPower(-0.5);
+        sleep(500);
+        frontRight.setPower(0);
+        backRight.setPower(0;
         frontLeft.setPower(0);
-        backLeft.setPower(0);
-        Intake.setPower(0);
+        backLeft.setPower(0;
+        
 
         // Zera o giroscópio
         imu.resetYaw();
@@ -66,7 +64,11 @@ public class Autonomous extends LinearOpMode {
             double heading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
 
             telemetry.addData("Angulo do Giroscópio", "%.2f graus", heading);
-            telemetry.update();
+
+            if (Shooter != null) {
+                telemetry.addData("Potencia Shooter", Shooter.getPower());
+                telemetry.update();
+            }
         }
     }
 }
