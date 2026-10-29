@@ -2,21 +2,21 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name = "TeleOP", group = "REV")
-public class TeleOP extends OpMode {
+@TeleOp(name = "menezes", group = "REV")
+public class menezes extends OpMode {
 
     private DcMotorEx Motor0;
     private DcMotorEx Motor1;
     private DcMotorEx Motor2;
     private DcMotorEx Motor3;
-    private DcMotorEx MotorShooter0;
+    private DcMotorEx Shooter;
     private DcMotorEx Motor4;
 
-    private 
 
     @Override
     public void init() {
@@ -27,19 +27,18 @@ public class TeleOP extends OpMode {
             Motor3 = hardwareMap.get(DcMotorEx.class, "Motor3");
             Motor4 = hardwareMap.get(DcMotorEx.class, "Motor4");
             MotorShooter0 = hardwareMap.get(DcMotorEx.class, "MotorShooter0");
+            Servo1 = hardwareMap.get(CRServo.class, "Servo1");
 
-            Motor0.setDirection(DcMotorSimple.Direction.REVERSE);
-            Motor2.setDirection(DcMotorSimple.Direction.REVERSE);
-            Motor4.setDirection(DcMotorSimple.Direction.REVERSE);
+            if (Motor0 != null) Motor0.setDirection(DcMotorSimple.Direction.REVERSE);
+            if (Motor2 != null) Motor2.setDirection(DcMotorSimple.Direction.REVERSE);
 
-            Motor0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            Motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            Motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            Motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            if (Motor0 != null) Motor0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            if (Motor1 != null) Motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            if (Motor2 != null) Motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            if (Motor3 != null) Motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            if (Motor4 != null) Motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-            if (Motor4 != null) {
-                Motor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            }
+            MotorShooter0.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             if (MotorShooter0 != null) {
                 MotorShooter0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -69,26 +68,30 @@ public class TeleOP extends OpMode {
 
         double maxPower = Math.max(Math.abs(Motor0Power), Math.max(Math.abs(Motor1Power), Math.max(Math.abs(Motor2Power), Math.abs(Motor3Power))));
 
-        if (maxPower > 0.6) {
+        if (maxPower > 1.0) {
             Motor0Power /= maxPower;
             Motor1Power /= maxPower;
             Motor2Power /= maxPower;
             Motor3Power /= maxPower;
         }
 
-        if (Motor0 != null && Motor1 != null && Motor2 != null && Motor3 != null) {
-            Motor0.setPower(Motor0Power);
-            Motor1.setPower(Motor1Power);
-            Motor2.setPower(Motor2Power);
-            Motor3.setPower(Motor3Power);
-        }
+        double limiteVelocidade = 0.8;
+        Motor0Power *= limiteVelocidade;
+        Motor1Power *= limiteVelocidade;
+        Motor2Power *= limiteVelocidade;
+        Motor3Power *= limiteVelocidade;
+
+        if (Motor0 != null) Motor0.setPower(Motor0Power);
+        if (Motor1 != null) Motor1.setPower(Motor1Power);
+        if (Motor2 != null) Motor2.setPower(Motor2Power);
+        if (Motor3 != null) Motor3.setPower(Motor3Power);
 
         double gatilho = gamepad1.right_trigger;
         if (MotorShooter0 != null) {
-            if (gatilho > 0.7) {
-                MotorShooter0.setPower(gatilho);
+            if (gatilho > 0.1) {
+                MotorShooter0.setPower(gatilho * 0.6);
             } else if (gamepad1.a) {
-                MotorShooter0.setPower(0.9);
+                MotorShooter0.setPower(0.7);
             } else {
                 MotorShooter0.setPower(0.0);
             }
@@ -96,18 +99,25 @@ public class TeleOP extends OpMode {
 
         if (Motor4 != null) {
             if (gamepad1.b) {
-                Motor4.setPower(0.9);
+                Motor4.setPower(-0.9);
             } else {
                 Motor4.setPower(0.0);
             }
         }
 
-        telemetry.addData("Shooter Conectado?", MotorShooter0 != null ? "SIM" : "NAO");
-        if (MotorShooter0 != null) {
-            telemetry.addData("Potencia Shooter", MotorShooter0.getPower());
+        if (Servo1 != null) {
+            if (gamepad1.x) {
+                Servo1.setPower(1.0);
+            } else if (gamepad1.y) {
+                Servo1.setPower(-1.0);
+            } else {
+                Servo1.setPower(0.0);
+            }
         }
-        telemetry.addData("Motor4 Conectado?", Motor4 != null ? "SIM" : "NAO");
-        telemetry.addData("Botao B Pressionado?", gamepad1.b);
+
+        telemetry.addData("MotorShooter0 Power", MotorShooter0 != null ? MotorShooter0.getPower() : 0);
+        telemetry.addData("Servo1 Power", Servo1 != null ? Servo1.getPower() : 0);
         telemetry.update();
+
     }
 }
